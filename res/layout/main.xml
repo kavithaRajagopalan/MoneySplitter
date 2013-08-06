@@ -1,13 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="Hello World, MonSplit"
-    />
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:padding="30dip"
+        >
+    <EditText
+            android:id="@+id/fromName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="From"
+            />
+    <EditText
+            android:id="@+id/toName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="To"
+            />
+    <EditText
+            android:id="@+id/amount"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Amount"
+            />
+    <LinearLayout
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            >
+        <Button
+                android:id="@+id/submitTransaction"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:onClick="submitTransaction"
+                android:layout_weight="1"
+                />
+        <Button
+                android:id="@+id/deleteAllTransactions"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Delete all"
+                android:onClick="deleteAllTransactions"
+                android:layout_weight="1"
+                />
+
+    </LinearLayout>
 </LinearLayout>
 

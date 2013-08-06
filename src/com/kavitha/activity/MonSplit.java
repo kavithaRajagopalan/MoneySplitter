@@ -2,18 +2,33 @@ package com.kavitha.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 import com.kavitha.R;
 import com.kavitha.database.AmountDataSource;
 
 public class MonSplit extends Activity {
+    private AmountDataSource amountDAO;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        AmountDataSource amountDAO = new AmountDataSource(this);
-        amountDAO.insertTransaction("Kavitha", "ABD", 1000);
+        amountDAO = new AmountDataSource(this);
         amountDAO.listAllTransactions();
     }
 
+    public void submitTransaction(View view) {
+        String fromName = ((EditText) findViewById(R.id.fromName)).getText().toString();
+        String toName = ((EditText) findViewById(R.id.toName)).getText().toString();
+        long amount = Long.parseLong(((EditText) findViewById(R.id.amount)).getText().toString());
+        amountDAO.insertTransaction(fromName, toName, amount);
+        Toast.makeText(this, "Sucessfully inserted", Toast.LENGTH_SHORT).show();
+    }
+
+    public void deleteAllTransactions(View view) {
+        amountDAO.deleteAllTransactions();
+    }
 }

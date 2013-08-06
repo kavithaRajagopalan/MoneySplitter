@@ -55,4 +55,10 @@ public class AmountDataSource {
         cursor.close();
         database.close();
     }
+
+    public void deleteAllTransactions() {
+        database = dbHelper.getWritableDatabase();
+        database.delete(DbHelper.TABLE_NAME,null,null);
+        database.close();
+    }
 }
