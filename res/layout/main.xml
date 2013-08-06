@@ -50,11 +50,11 @@
                 android:onClick="deleteAllTransactions"
                 android:layout_weight="1"
                 />
-        </LinearLayout>
-        <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:orientation="horizontal">
+    </LinearLayout>
+    <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="horizontal">
         <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -67,6 +67,13 @@
                 android:layout_height="wrap_content"
                 android:text="View Per User"
                 android:onClick="viewTransactionForUser"
+                android:layout_weight="1"
+                />
+        <Button
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Amount Between"
+                android:onClick="amountBetween"
                 android:layout_weight="1"
                 />
 

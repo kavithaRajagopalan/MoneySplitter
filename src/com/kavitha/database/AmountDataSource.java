@@ -60,7 +60,7 @@ public class AmountDataSource {
     public List<Credit> listForUser(String userName) {
        List<Credit> transactions = new ArrayList<Credit>();
         database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.query(TABLE_NAME,all_columns, COLUMN_FROM +"=?", new String[]{userName},null,null,COLUMN_FROM);
+        Cursor cursor = database.query(TABLE_NAME,all_columns, COLUMN_FROM +"=? or "+COLUMN_TO+"=?", new String[]{userName, userName},null,null,COLUMN_FROM);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             transactions.add(cursorToComment(cursor));
@@ -69,6 +69,33 @@ public class AmountDataSource {
         cursor.close();
         database.close();
         return transactions;
+    }
+
+    public long amountBetween(String userOne, String userTwo) {
+        long credit = 0;
+        long debit = 0;
+        database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(TABLE_NAME,all_columns, COLUMN_FROM +"=? and "+COLUMN_TO+"=?", new String[]{userOne, userTwo},null,null,null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            credit+= cursor.getLong(3);
+            Log.e("wwCredit", Long.toString(credit));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        cursor = database.query(TABLE_NAME,all_columns, COLUMN_FROM +"=? and "+COLUMN_TO+"=?", new String[]{userTwo, userOne},null,null,null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            debit+= cursor.getLong(3);
+            Log.e("wwDebit", Long.toString(debit));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        database.close();
+
+        return credit-debit;
     }
 
     public void deleteAllTransactions() {

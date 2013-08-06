@@ -51,6 +51,20 @@ public class MonSplit extends Activity {
        populateTransactions(creditsForUser);
     }
 
+    public void amountBetween(View view) {
+        String fromName = ((EditText) findViewById(R.id.fromName)).getText().toString();
+        String toName = ((EditText) findViewById(R.id.toName)).getText().toString();
+        String message = "";
+        TextView textView = new TextView(this);
+
+        long balanceAmount = amountDAO.amountBetween(fromName, toName);
+        LinearLayout showTransactions = (LinearLayout) findViewById(R.id.transactionsView);
+        showTransactions.removeAllViews();
+        message = (balanceAmount<0) ? fromName+ " needs to pay "+ balanceAmount* -1 + " to " + toName : toName+ "needs to pay "+ balanceAmount + " to " + fromName;
+        textView.setText(message);
+        showTransactions.addView(textView);
+    }
+
     private void populateTransactions(List<Credit> allTransactions) {
         LinearLayout showTransactions = (LinearLayout) findViewById(R.id.transactionsView);
         showTransactions.removeAllViews();
