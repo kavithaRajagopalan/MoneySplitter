@@ -34,9 +34,9 @@
     <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
+            android:orientation="horizontal"
             >
         <Button
-                android:id="@+id/submitTransaction"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="Submit"
@@ -44,19 +44,29 @@
                 android:layout_weight="1"
                 />
         <Button
-                android:id="@+id/deleteAllTransactions"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="Delete all"
                 android:onClick="deleteAllTransactions"
                 android:layout_weight="1"
                 />
+        </LinearLayout>
+        <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:orientation="horizontal">
         <Button
-                android:id="@+id/viewAllTransactions"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="View All"
                 android:onClick="viewAllTransactions"
+                android:layout_weight="1"
+                />
+        <Button
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="View Per User"
+                android:onClick="viewTransactionForUser"
                 android:layout_weight="1"
                 />
 

@@ -35,13 +35,23 @@ public class MonSplit extends Activity {
     public void deleteAllTransactions(View view) {
         amountDAO.deleteAllTransactions();
         LinearLayout showTransactions = (LinearLayout) findViewById(R.id.transactionsView);
-        if(showTransactions != null) {
+        if (showTransactions != null) {
             showTransactions.removeAllViews();
         }
     }
 
     public void viewAllTransactions(View view) {
         List<Credit> allTransactions = amountDAO.listAllTransactions();
+        populateTransactions(allTransactions);
+    }
+
+    public void viewTransactionForUser(View view) {
+        String fromName = ((EditText) findViewById(R.id.fromName)).getText().toString();
+        List<Credit> creditsForUser = amountDAO.listForUser(fromName);
+       populateTransactions(creditsForUser);
+    }
+
+    private void populateTransactions(List<Credit> allTransactions) {
         LinearLayout showTransactions = (LinearLayout) findViewById(R.id.transactionsView);
         showTransactions.removeAllViews();
 
@@ -51,5 +61,4 @@ public class MonSplit extends Activity {
             showTransactions.addView(textView);
         }
     }
-
 }

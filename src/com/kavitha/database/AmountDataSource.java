@@ -49,7 +49,20 @@ public class AmountDataSource {
         Cursor cursor = database.query(TABLE_NAME, DbHelper.all_columns, null, null, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Log.e("Cursor", "yes");
+            transactions.add(cursorToComment(cursor));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        database.close();
+        return transactions;
+    }
+
+    public List<Credit> listForUser(String userName) {
+       List<Credit> transactions = new ArrayList<Credit>();
+        database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(TABLE_NAME,all_columns, COLUMN_FROM +"=?", new String[]{userName},null,null,COLUMN_FROM);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
             transactions.add(cursorToComment(cursor));
             cursor.moveToNext();
         }
