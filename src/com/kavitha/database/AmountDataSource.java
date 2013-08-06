@@ -42,7 +42,7 @@ public class AmountDataSource {
         database.close();
     }
 
-    public void listAllTransactions() {
+    public List<Credit> listAllTransactions() {
         List<Credit> transactions = new ArrayList<Credit>();
 
         database = dbHelper.getReadableDatabase();
@@ -50,15 +50,28 @@ public class AmountDataSource {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Log.e("Cursor", "yes");
+            transactions.add(cursorToComment(cursor));
             cursor.moveToNext();
         }
         cursor.close();
         database.close();
+        return transactions;
     }
 
     public void deleteAllTransactions() {
         database = dbHelper.getWritableDatabase();
         database.delete(DbHelper.TABLE_NAME,null,null);
         database.close();
+    }
+
+    public Credit cursorToComment(Cursor cursor) {
+        String from = cursor.getString(1);
+        String to = cursor.getString(2);
+        long amount = cursor.getLong(3);
+        Credit credit = new Credit();
+        credit.setdebitedFrom(from);
+        credit.setcreditedTo(to);
+        credit.setAmount(amount);
+        return credit;
     }
 }
