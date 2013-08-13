@@ -1,6 +1,8 @@
 package com.kavitha.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,6 +14,8 @@ import com.kavitha.database.AmountDataSource;
 import com.kavitha.model.Credit;
 
 import java.util.List;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class MonSplit extends Activity {
     private AmountDataSource amountDAO;
@@ -29,15 +33,31 @@ public class MonSplit extends Activity {
         String toName = ((EditText) findViewById(R.id.toName)).getText().toString();
         long amount = Long.parseLong(((EditText) findViewById(R.id.amount)).getText().toString());
         amountDAO.insertTransaction(fromName, toName, amount);
-        Toast.makeText(this, "Sucessfully inserted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Sucessfully inserted", LENGTH_SHORT).show();
     }
 
     public void deleteAllTransactions(View view) {
-        amountDAO.deleteAllTransactions();
-        LinearLayout showTransactions = (LinearLayout) findViewById(R.id.transactionsView);
-        if (showTransactions != null) {
-            showTransactions.removeAllViews();
-        }
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Confirm Delete");
+        alert.setMessage("Do you want to delete all the transactions");
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Delete cancelled", LENGTH_SHORT).show();
+            }
+        });
+        alert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                amountDAO.deleteAllTransactions();
+                LinearLayout showTransactions = (LinearLayout) findViewById(R.id.transactionsView);
+                if (showTransactions != null) {
+                    showTransactions.removeAllViews();
+                }
+                Toast.makeText(getApplicationContext(), "All transactions deleted", LENGTH_SHORT).show();
+            }
+        });
+        alert.show();
     }
 
     public void viewAllTransactions(View view) {
