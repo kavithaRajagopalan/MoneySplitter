@@ -4,7 +4,8 @@
           android:versionCode="1"
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="10"/>
-    <application android:label=".MoneySplitter">
+    <application android:label="Money Splitter"
+            android:icon="@drawable/money_splitter">
         <activity android:name=".activity.MonSplit"
                   android:label="@string/app_name">
             <intent-filter>

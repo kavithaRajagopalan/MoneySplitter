@@ -60,7 +60,7 @@ public class MonSplit extends Activity {
         long balanceAmount = amountDAO.amountBetween(fromName, toName);
         LinearLayout showTransactions = (LinearLayout) findViewById(R.id.transactionsView);
         showTransactions.removeAllViews();
-        message = (balanceAmount<0) ? fromName+ " needs to pay "+ balanceAmount* -1 + " to " + toName : toName+ "needs to pay "+ balanceAmount + " to " + fromName;
+        message = (balanceAmount<0) ? fromName+ " needs to pay "+ balanceAmount* -1 + " to " + toName : toName+ " manifneeds to pay "+ balanceAmount + " to " + fromName;
         textView.setText(message);
         showTransactions.addView(textView);
     }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import com.kavitha.model.Credit;
 
 import java.util.ArrayList;
@@ -37,8 +36,7 @@ public class AmountDataSource {
         values.put(COLUMN_FROM, from);
         values.put(COLUMN_TO, to);
         values.put(COLUMN_AMOUNT, amount);
-        long insert_id = database.insert(TABLE_NAME, null, values);
-        Log.e("Insert", "Happened");
+        database.insert(TABLE_NAME, null, values);
         database.close();
     }
 
@@ -80,7 +78,6 @@ public class AmountDataSource {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             credit+= cursor.getLong(3);
-            Log.e("wwCredit", Long.toString(credit));
             cursor.moveToNext();
         }
         cursor.close();
@@ -89,7 +86,6 @@ public class AmountDataSource {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             debit+= cursor.getLong(3);
-            Log.e("wwDebit", Long.toString(debit));
             cursor.moveToNext();
         }
         cursor.close();
